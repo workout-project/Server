@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors"
 import userRouter from "./routes/signupRoutes.js";
 import detailRouter from "./routes/userDetailRoutes.js";
-import PTRouter from "./routes/signupPTRoutes.js";
+// import PTRouter from "./routes/signupPTRoutes.js";
 
 dotenv.config()
 
@@ -24,7 +24,7 @@ app.use(cookieParser());
 
 //routes
 app.use(userRouter)
-app.use(PTRouter)
+// app.use(PTRouter)
 app.use(detailRouter)
 
 

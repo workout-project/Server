@@ -22,11 +22,24 @@ const signupPT = new Schema({
     password: {
         type: String,
         required: true,
+    },
+    about: {
+        type: String
+    },
+    profileImg: {
+        type: Buffer
+    },
+    latitude: {
+        type: String
+    },
+    longitude: {
+        type: String
     }
+
 })
 
 //sign up 
-signupPT.statics.signup = async function (firstName, lastName, email, password) {
+signupPT.statics.signup = async function (firstName, lastName, email, password,about,profileImg,latitude,longitude) {
     if (!firstName && !email && !lastName && !password) {
         throw Error('Please fill up the sign up form')
     }
@@ -48,7 +61,25 @@ signupPT.statics.signup = async function (firstName, lastName, email, password) 
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
-    const pt = await this.create({ firstName, email, lastName, password: hash })
+    const pt = await this.create({ firstName, email, lastName, password: hash, about, profileImg, latitude, longitude })
+
+    return pt
+}
+
+signupPT.statics.login = async function (email, password) {
+    //validation first , empty check
+    if (!email || !password) {
+        throw Error('Please fill up the sign up form')
+    }
+    //email check and password match
+    const pt = await this.findOne({ email })
+    if (!pt) {
+        throw Error('Email is incorrect or not existed')
+    }
+    const match = await bcrypt.compare(password, pt.password)
+    if (!match) {
+        throw Error('Password or email is incorrect')
+    }
 
     return pt
 }
