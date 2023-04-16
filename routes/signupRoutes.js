@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getDetails, patchDetails, signupPost } from "../controllers/signupController.js";
+import { getDetails, getLink, patchDetails, postForgotPassword, postNewPassword, signupPost } from "../controllers/signupController.js";
 import { loginPost } from "../controllers/loginController.js";
 import requireAuth from "../middleware/reqAuth.js";
 import { getDetailsForClient, getDetailsForPT, loginPostPT, patchDetailsPT, signupPostPT } from "../controllers/signupControllerPT.js";
@@ -11,6 +11,9 @@ userRouter.post('/signup', signupPost)
 userRouter.post('/login', loginPost)
 userRouter.post('/signupPT', signupPostPT)
 userRouter.post('/loginPT', loginPostPT)
+userRouter.post('/forgotPassword', postForgotPassword)
+userRouter.get('/forgotPassword/:id/:token', getLink)
+userRouter.post('/forgotPassword/:id/:token',postNewPassword)
 userRouter.use(requireAuth)
 userRouter.get('/signupPTClient', getDetailsForClient)
 userRouter.patch('/signup', patchDetails)

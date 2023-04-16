@@ -38,7 +38,8 @@ export const loginPostPT = async (req, res) => {
 export const patchDetailsPT = async (req, res) => {
     console.log(req.user)
     const user_id = req.user._id
-    console.log('userid', user_id)
+    // console.log('userid', user_id)
+    console.log()
 
     const portfolio = await PTApp.find({ _id: user_id }).updateOne({ _id: user_id }, { ...req.body })
     const updatedPortfolio = await PTApp.find({ _id: user_id })

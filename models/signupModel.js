@@ -86,6 +86,20 @@ userDetail.statics.login = async function (email,password) {
 }
 
 
+userDetail.statics.forgotPassword = async function (email) {
+    if (!email) {
+        throw Error('Please fill up the field')
+    }
+
+    //email  match
+    const user = await this.findOne({ email })
+    if (!user) {
+        throw Error('Email is incorrect or not existed')
+    }
+
+    return user
+}
+
 
 const UserApp = mongoose.model('userapp', userDetail);
 

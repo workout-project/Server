@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors"
 import userRouter from "./routes/signupRoutes.js";
 import detailRouter from "./routes/userDetailRoutes.js";
+import { getLink } from "./controllers/signupController.js";
 // import PTRouter from "./routes/signupPTRoutes.js";
 
 dotenv.config()
@@ -16,6 +17,8 @@ mongoose.connect(process.env.DB_URI)
 
 const app = express();
 
+
+app.set('view engine', 'ejs');
 //middleware 
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
